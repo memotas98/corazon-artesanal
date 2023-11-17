@@ -14,7 +14,7 @@ class InformacionPublica(models.Model):
 
 
 class InformacionPrivada(models.Model):
-    id_informacion_publica = models.ForeignKey()
+    id_informacion_publica = models.ForeignKey(Id)
     fecha_nacimiento = models.DateField()
     contrasena = models.CharField(max_length=8)
 
