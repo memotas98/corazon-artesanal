@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "Gestion_de_Usuarios_tipo_CompradorM.apps.GestionDeUsuariosTipoCompradormConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
