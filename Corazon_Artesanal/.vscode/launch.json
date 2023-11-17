@@ -1,0 +1,21 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Attach to Chrome",
+            "port": 9222,
+            "request": "attach",
+            "type": "chrome",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Open Inicio_Sesion_Artesano.html",
+            "file": "c:\\Users\\Guillermo\\Downloads\\proyecto_tercer_parcial\\proyecto_tercer_parcial\\Corazon_Artesanal\\Gestion_de_Usuarios_tipo_ArtesanosM\\templates\\artesano\\Inicio_Sesion_Artesano.html"
+        }
+    ]
+}
