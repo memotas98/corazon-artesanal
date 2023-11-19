@@ -91,7 +91,7 @@ DATABASES = {
     }
 }
 
-AUTH_USER_MODEL = 'Gestion_de_Usuarios_tipo_CompradorM.Comprador'
+AUTH_USER_MODEL = 'Gestion_de_Usuarios_tipo_Comprador.Comprador'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

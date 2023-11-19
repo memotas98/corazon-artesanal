@@ -8,7 +8,7 @@ class InformacionPublica(models.Model):
     correo_electronico = models.CharField(max_length=50)
 
 class InformacionPrivada(models.Model):
-    id_informacion_publica = models.ForeignKey(InformacionPublica)
+    id_informacion_publica = models.ForeignKey(InformacionPublica, on_delete=models.CASCADE)
     fecha_nacimiento = models.DateField()
     contrasena = models.CharField(max_length=8)
 
