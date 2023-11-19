@@ -31,7 +31,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "Gestion_de_Usuarios_tipo_CompradorM.apps.GestionDeUsuariosTipoCompradormConfig",
+    "Gestion_de_Usuarios_tipo_Comprador.apps.GestionDeUsuariosTipoCompradorConfig",
+    "Gestion_de_Inventario.apps.GestionDeInventarioConfig",
+    "Gestion_de_Productos.apps.GestionDeProductosConfig",
+    "Gestion_de_Usuarios_tipo_Artesanos.apps.GestionDeUsuariosTipoArtesanosConfig",
+    "Pago_y_Compras.apps.PagoYComprasConfig",
+    "Carrito_de_Compras.apps.CarritoDeComprasConfig",
+    "Historial_Compra_Venta.apps.HistorialCompraVentaConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
