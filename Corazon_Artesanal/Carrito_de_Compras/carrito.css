@@ -1,0 +1,20 @@
+body {
+    padding: 20px;
+  }
+  
+  .container {
+    max-width: 800px;
+  }
+  
+  .carrito-header {
+    background-color: #f8f9fa;
+    font-weight: bold;
+  }
+  
+  .carrito-row {
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  .total-row {
+    font-weight: bold #c29b61;
+  }
