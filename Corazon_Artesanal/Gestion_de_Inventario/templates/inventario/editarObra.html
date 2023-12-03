@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil Artesano</title>
+    <title>Creacion de Obra</title>
     {% load static %}
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
@@ -14,20 +14,20 @@
 <body class="d-flex flex-column min-vh-100">
     <nav class="navbar navbar-expand-lg" style="background-color: #ebe4d4;">
         <div class="container-fluid">
-            <a class="logo" href="{% url 'Gestion_de_Usuarios_tipo_Artesanos:indexArtesano' pk=artesano.pk %}"><img src="{% static 'Imgs/logoCA.jpeg' %}" width="80"></a>
+            <a class="logo" href="{% url 'Gestion_de_Usuarios_tipo_Artesanos:indexArtesano' pk=artesano_id %}"><img src="{% static 'Imgs/logoCA.jpeg' %}" width="80"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link link-dark" href="{% url 'Gestion_de_Usuarios_tipo_Artesanos:indexArtesano' pk=artesano.pk %}">Inicio</a>
+                        <a class="nav-link link-dark" href="{% url 'Gestion_de_Usuarios_tipo_Artesanos:indexArtesano' pk=artesano_id %}">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link link-dark" href="{% url 'Gestion_de_Inventario:inventario' pk=artesano.pk %}">Inventario</a>
+                        <a class="nav-link link-dark" href="{% url 'Gestion_de_Inventario:inventario' pk=artesano_id %}">Inventario</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link link-dark" href="{% url 'Gestion_de_Inventario:indexObra' pk=artesano.pk %}">Agregar Obra</a>
+                        <a class="nav-link link-dark" href="{% url 'Gestion_de_Inventario:indexObra' pk=artesano_id %}">Agregar Obra</a>
                     </li>
                     
                     <li class="nav-item">
@@ -45,7 +45,7 @@
                 <div class="nav-item dropdown dropstart">
                     <a class="nav-link logo " role="button" data-bs-toggle="dropdown" aria-expanded="false"><img src="{% static 'Imgs/user-solid.png' %}" width="35"></a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{% url 'Gestion_de_Usuarios_tipo_Artesanos:perfilArtesano' pk=artesano.pk %}">Perfil</a></li>
+                            <li><a class="dropdown-item" href="{% url 'Gestion_de_Usuarios_tipo_Artesanos:perfilArtesano' pk=artesano_id %}">Perfil</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="{% url 'Gestion_de_Usuarios_tipo_Artesanos:loginArtesano' %}">Cerrar Sesion</a></li>
                         </ul>
@@ -56,17 +56,14 @@
     <div class="d-flex justify-content-center align-items-center flex-grow-1" style="background-color: #cc9966;">
         <div class="card">
             <div class="card-header" style="background-color: #fbebdb;">
-                <h1>{{ artesano.nombre }}</h1>
+                Obra
             </div>
             <div class="card-body" style="background-color: #fbebdb;">
-                <h6 class="card-text">{{ artesano.fecha_nacimiento }}</h6>
-                <h4 class="card-text">{{ artesano.telefono }}</h4>
-                <h4 class="card-text">{{ artesano.correo_electronico }}</h4>
-                <h6 class="card-text">{{ artesano.contraseña }}</h6>
-                <h2 class="card-text">{{ artesano.historia }}</h2>
-            </div>
-            <div class="card-footer text-center" style="background-color: #fbebdb;">
-                <a class="btn" href="{% url 'Gestion_de_Usuarios_tipo_Artesanos:indexArtesano' pk=artesano.pk %}" role="button" value="Confirm" style="background-color: #9f8f82; color: #fff;">Volver</a>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="btn" style="background-color: #9f8f82; color: #fff;" type="submit">Actualizar Obra</button>
+                </form>
             </div>
         </div>
     </div>

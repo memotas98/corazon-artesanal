@@ -24,7 +24,7 @@
                         <a class="nav-link link-dark" href="{% url 'Gestion_de_Usuarios_tipo_Artesanos:indexArtesano' pk=artesano.pk %}">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link link-dark" href="#">Inventario</a>
+                        <a class="nav-link link-dark" href="{% url 'Gestion_de_Inventario:inventario' pk=artesano.pk %}">Inventario</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link link-dark" href="{% url 'Gestion_de_Inventario:indexObra' pk=artesano.pk %}">Agregar Obra</a>

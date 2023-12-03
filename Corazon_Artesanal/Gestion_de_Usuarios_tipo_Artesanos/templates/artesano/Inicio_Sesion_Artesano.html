@@ -27,7 +27,7 @@
             </figure>
             <div class="card">
                <div class="card-header text-center">
-                  Registrarse
+                  Iniciar Sesion
                </div>
                <div class="card-body">
                   <form method="post">
@@ -37,7 +37,8 @@
                   </form>
                </div>
                <div class="card-footer text-center">
-                  <a href="{% url 'Gestion_de_Usuarios_tipo_Artesanos:RegistroArtesano' %}">¿No tiene cuenta?, Regístrese Aquí.</a>
+                  <p><a href="{% url 'Gestion_de_Usuarios_tipo_Artesanos:RegistroArtesano' %}">¿No tiene cuenta?, Regístrese Aquí.</a></p>
+                  <a href="{% url 'Gestion_de_Usuarios_tipo_Comprador:RegistroComprador' %}">¿Quieres ser cliente?, Regístrese Aquí.</a>
                </div>
             </div>
          </div>

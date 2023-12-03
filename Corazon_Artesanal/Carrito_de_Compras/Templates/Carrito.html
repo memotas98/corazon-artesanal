@@ -3,37 +3,105 @@
 <head >
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <title>Carrito de Compras</title>
+    {% load static %}
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"crossorigin="anonymous"></script>
 </head>
 <body>
-    <table class="tableCarrito">
-        <thead class="carrito-header">
-          <tr>
-            <th>ID Carrito</th>
-            <th>ID Comprador</th>
-            <th>Fecha Creación</th>
-            <th>Fecha Actualización</th>
-            <th>Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          
-          <tr class="carrito-row">
-            <td>1</td>
-            <td>101</td>
-            <td>2023-11-10 10:30:00</td>
-            <td>2023-11-10 12:45:00</td>
-            <td>$150.00</td>
-          </tr>
-         
-          <tr class="total-row">
-            <td colspan="4" class="text-right">Total:</td>
-            <td>$150.00</td>
-          </tr>
-        </tbody>
-      </table>
+  <nav class="navbar navbar-expand-lg" style="background-color: #ebe4d4;">
+    <div class="container-fluid">
+        <a class="logo" href="{% url 'Gestion_de_Usuarios_tipo_Comprador:indexComprador' pk=carrito_id %}"><img src="{% static 'Imgs/logoCA.jpeg' %}" width="80"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link link-dark" href="{% url 'Gestion_de_Usuarios_tipo_Comprador:indexComprador' pk=carrito_id %}">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link link-dark" href="#">Comprar</a>
+                    
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link link-dark" href="#">Historial de compras</a>
+                </li>
+            </ul>
+            <div class="nav-item">
+                <a class="nav-link logo" href="{% url 'Carrito_de_Compras:verCarrito' pk=carrito_id %}"><img src="{% static 'Imgs/cart-shopping-solid.png' %}" width="45"></a>
+            </div>
+            
+            <div class="nav-item dropdown dropstart">
+                <a class="nav-link logo" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img src="{% static 'Imgs/user-solid.png' %}" width="35"></a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'Gestion_de_Usuarios_tipo_Comprador:perfilComprador' pk=carrito_id %}">Perfil</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{% url 'Gestion_de_Usuarios_tipo_Comprador:loginComprador' %}">Cerrar Sesion</a></li>
+                    </ul>
+            </div>
+        </div>
     </div>
-<script src="../bootstrap-5.3.2-dist/js/bootstrap.js"></script>
+</nav>
+  <div class="d-flex justify-content-center align-items-center flex-grow-1" style="background-color: #cc9966;">
+    {% if carrito_list %}
+        <div class="row">
+            {% for carrito in carrito_list %}
+                {% if DetalleCarrito.obraID == obra_id %}
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header" style="background-color: #fbebdb;">
+                                <h4>Nombre de la Obra: {{obra.nombre}}</h4>
+                            </div>
+                            <div class="card-body" style="background-color: #fbebdb;">
+                                <h5>Autor de la obra: {{obra.id_artesano.nombre}}</h5>
+                                <h6>Precio: {{obra.precio}}</h6>
+                                <div class="row">
+                                  <h6>Cantidad Existente: {{obra.cantidadExistente}}</h6>
+                                  <button type="button" class="btn btn-success">+</button>
+                                  <button type="button" class="btn btn-danger">-</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% empty %}
+                <p>No hay ninguna obra agregada al carrito</p>
+            {% endfor %}
+            <div>
+              <p>Total: </p>
+              <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Pagar
+              </button>
+            </div>
+        </div>
+    {% else %}
+        <p>No hay ninguna obra agregada</p>
+    {% endif %}
+  </div>
+  </div>
+
+  <!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 </body>
 </html>

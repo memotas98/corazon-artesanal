@@ -8,3 +8,4 @@ urlpatterns = [
     path("perfil/<int:pk>/", views.PerfilArtesano.as_view(), name="perfilArtesano"),
     path('', views.RegistroView.as_view(), name='RegistroArtesano')
 ]
+

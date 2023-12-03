@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario</title>
+    {% load static %}
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"crossorigin="anonymous"></script>
+
+    <link rel="icon" href="{% static 'Imgs/logoCorazon.jpg' %}" type="image/gif"/>
+</head>
+<body class="d-flex flex-column min-vh-100" >
+    <nav class="navbar navbar-expand-lg" style="background-color: #ebe4d4;">
+        <div class="container-fluid">
+            <a class="logo" href="{% url 'Gestion_de_Usuarios_tipo_Artesanos:indexArtesano' pk=artesano_id %}"><img src="{% static 'Imgs/logoCA.jpeg' %}" width="80"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link link-dark" href="{% url 'Gestion_de_Usuarios_tipo_Artesanos:indexArtesano' pk=artesano_id %}">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link link-dark" href="{% url 'Gestion_de_Inventario:inventario' pk=artesano_id %}">Inventario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link link-dark" href="{% url 'Gestion_de_Inventario:indexObra' pk=artesano_id %}">Agregar Obra</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link link-dark" href="#">Historial de ventas</a>
+                    </li>
+                </ul>
+                
+                <!-- <li class="nav-item">
+                        <a class="nav-link logo" href="{% url 'Gestion_de_Usuarios_tipo_Artesanos:RegistroArtesano' %}"><img src="{% static 'Imgs/cart-shopping-solid.png' %}" width="45"></a>
+                    </li> -->
+                <!-- <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form> -->
+                <div class="nav-item dropdown dropstart">
+                    <a class="nav-link logo " role="button" data-bs-toggle="dropdown" aria-expanded="false"><img src="{% static 'Imgs/user-solid.png' %}" width="35"></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'Gestion_de_Usuarios_tipo_Artesanos:perfilArtesano' pk=artesano_id %}">Perfil</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{% url 'Gestion_de_Usuarios_tipo_Artesanos:loginArtesano' %}">Cerrar Sesion</a></li>
+                        </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="d-flex justify-content-center align-items-center flex-grow-1" style="background-color: #cc9966;">
+        {% if obra_list %}
+            <div class="row">
+                {% for obra in obra_list %}
+                    {% if obra.id_artesano.id == artesano_id %}
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header" style="background-color: #fbebdb;">
+                                    <h4>Nombre de la Obra: {{obra.nombre}}</h4>
+                                </div>
+                                <div class="card-body" style="background-color: #fbebdb;">
+                                    <h5>Autor de la obra: {{obra.id_artesano.nombre}}</h5>
+                                    <h6>Proceso creativo: {{obra.proceso_creativo}}</h6>
+                                    <h6>Precio: {{obra.precio}}</h6>
+                                    <h6>Cantidad Existente: {{obra.cantidadExistente}}</h6>
+                                    <div class="row">
+                                        <div class="col">
+                                            <h6>Descripcion de la obra: {{obra.descripcion}}</h6>
+                                        </div>
+                                        <div class="col">
+                                            <h6>Historia del Artista: {{obra.id_artesano.historia}}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer text-center" style="background-color: #fbebdb;">
+                                    <a class="btn" href="{% url 'Gestion_de_Inventario:detalleObra' pk=artesano_id id=obra.pk %}" role="button" value="Confirm" style="background-color: #9f8f82; color: #fff;">Detalle Obra</a>
+                                    <a class="btn btn btn-success" href="{% url 'Gestion_de_Inventario:actualizarObra' pk=artesano_id id=obra.pk %}" role="button">Editar</a>
+                                    <a class="btn btn btn-danger" href="{% url 'Gestion_de_Inventario:eliminacion' pk=artesano_id id=obra.pk %}" role="button" value="Confirm">Eliminar</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% empty %}
+                    <p>No hay ninguna obra agregada</p>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No hay ninguna obra agregada</p>
+        {% endif %}
+    </div>
+    <div class="footer_section mt-auto" style="background-color: #221911;">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-3 col-sm-6">
+                    <h2 class="useful_text text-center" style="color: white;">Corazon Artesanal</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

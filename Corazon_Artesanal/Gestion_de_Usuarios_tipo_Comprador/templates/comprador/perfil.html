@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil Artesano</title>
+    <title>Perfil Comprador</title>
     {% load static %}
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
@@ -14,40 +14,29 @@
 <body class="d-flex flex-column min-vh-100">
     <nav class="navbar navbar-expand-lg" style="background-color: #ebe4d4;">
         <div class="container-fluid">
-            <a class="logo" href="{% url 'Gestion_de_Usuarios_tipo_Artesanos:indexArtesano' pk=artesano.pk %}"><img src="{% static 'Imgs/logoCA.jpeg' %}" width="80"></a>
+            <a class="logo" href="{% url 'Gestion_de_Usuarios_tipo_Comprador:indexComprador' pk=comprador.pk %}"><img src="{% static 'Imgs/logoCA.jpeg' %}" width="80"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link link-dark" href="{% url 'Gestion_de_Usuarios_tipo_Artesanos:indexArtesano' pk=artesano.pk %}">Inicio</a>
+                        <a class="nav-link link-dark" href="{% url 'Gestion_de_Usuarios_tipo_Comprador:indexComprador' pk=comprador.pk %}">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link link-dark" href="{% url 'Gestion_de_Inventario:inventario' pk=artesano.pk %}">Inventario</a>
+                        <a class="nav-link link-dark" href="{% url 'Gestion_de_Productos:catalogo' pk=comprador.pk %}">Comprar</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link link-dark" href="{% url 'Gestion_de_Inventario:indexObra' pk=artesano.pk %}">Agregar Obra</a>
-                    </li>
-                    
-                    <li class="nav-item">
-                        <a class="nav-link link-dark" href="#">Historial de ventas</a>
+                        <a class="nav-link link-dark" href="#">Historial de compras</a>
                     </li>
                 </ul>
                 
-                <!-- <li class="nav-item">
-                        <a class="nav-link logo" href="{% url 'Gestion_de_Usuarios_tipo_Artesanos:RegistroArtesano' %}"><img src="{% static 'Imgs/cart-shopping-solid.png' %}" width="45"></a>
-                    </li> -->
-                <!-- <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form> -->
                 <div class="nav-item dropdown dropstart">
-                    <a class="nav-link logo " role="button" data-bs-toggle="dropdown" aria-expanded="false"><img src="{% static 'Imgs/user-solid.png' %}" width="35"></a>
+                    <a class="nav-link logo" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img src="{% static 'Imgs/user-solid.png' %}" width="35"></a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{% url 'Gestion_de_Usuarios_tipo_Artesanos:perfilArtesano' pk=artesano.pk %}">Perfil</a></li>
+                            <li><a class="dropdown-item" href="{% url 'Gestion_de_Usuarios_tipo_Comprador:perfilComprador' pk=comprador.pk %}">Perfil</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="{% url 'Gestion_de_Usuarios_tipo_Artesanos:loginArtesano' %}">Cerrar Sesion</a></li>
+                            <li><a class="dropdown-item" href="{% url 'Gestion_de_Usuarios_tipo_Comprador:loginComprador' %}">Cerrar Sesion</a></li>
                         </ul>
                 </div>
             </div>
@@ -56,17 +45,19 @@
     <div class="d-flex justify-content-center align-items-center flex-grow-1" style="background-color: #cc9966;">
         <div class="card">
             <div class="card-header" style="background-color: #fbebdb;">
-                <h1>{{ artesano.nombre }}</h1>
+                <h1>{{ comprador.username }}</h1>
             </div>
             <div class="card-body" style="background-color: #fbebdb;">
-                <h6 class="card-text">{{ artesano.fecha_nacimiento }}</h6>
-                <h4 class="card-text">{{ artesano.telefono }}</h4>
-                <h4 class="card-text">{{ artesano.correo_electronico }}</h4>
-                <h6 class="card-text">{{ artesano.contraseña }}</h6>
-                <h2 class="card-text">{{ artesano.historia }}</h2>
+                <h2 class="card-text">{{ comprador.first_name }}</h2>
+                <h2 class="card-text">{{ comprador.last_name }}</h2>
+                <h4 class="card-text">{{ comprador.direccion }}</h4>
+                <h4 class="card-text">{{ comprador.fecha_nacimiento }}</h4>
+                <h3 class="card-text">{{ comprador.email }}</h3>
+                <h3 class="card-text">{{ comprador.password }}</h3>
+                <h3 class="card-text">{{ comprador.telefono }}</h3>
             </div>
             <div class="card-footer text-center" style="background-color: #fbebdb;">
-                <a class="btn" href="{% url 'Gestion_de_Usuarios_tipo_Artesanos:indexArtesano' pk=artesano.pk %}" role="button" value="Confirm" style="background-color: #9f8f82; color: #fff;">Volver</a>
+                <a class="btn" href="{% url 'Gestion_de_Usuarios_tipo_Comprador:indexComprador' pk=comprador.pk %}" role="button" value="Confirm" style="background-color: #9f8f82; color: #fff;">Volver</a>
             </div>
         </div>
     </div>
