@@ -1,54 +1,53 @@
-from django.shortcuts import render, redirect
-from django.views import View
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views import View, generic
 from django import forms
-from .models import InformacionPublica, InformacionPrivada
+from .models import Artesano
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 
-class IndexView(View):
-    template_name = 'Inicio_Sesion_Artesano.html'
-
-    def get(self, request, *args, **kwargs):
-        return render(request, self.template_name)
-
-class LoginForm(forms.ModelForm):
+class ArtesanoForm(forms.ModelForm):
     class Meta:
-        model = InformacionPublica, InformacionPrivada
-        fields = ['correo_electronico', 'contrasena']
-        widgets = {'contrasena': forms.PasswordInput}
-
-class RegisterForm(forms.ModelForm):
+        model = Artesano
+        fields = ['nombre', 'telefono', 'historia', 'fecha_nacimiento', 'correo_electronico', 'contraseña']
+        widgets = {'contraseña': forms.PasswordInput}
+        
+class ArtesanoLoginForm(forms.ModelForm):
     class Meta:
-        model = InformacionPublica, InformacionPrivada
-        fields = ['nombre', 'telefono', 'historia', 'fecha_nacimiento', 'correo_electronico', 'contrasena']
-        widgets = {'contrasena': forms.PasswordInput}
+        model = Artesano
+        fields = ['correo_electronico', 'contraseña']
+        widgets = {'contraseña': forms.PasswordInput}
 
-class LoginView(View):
-    template_name = 'Inicio_Sesion_Artesano.html'
+def IndexView(request, pk):
+    artesano = get_object_or_404(Artesano, pk=pk)
+    return render(request, 'artesano/index.html', {'artesano': artesano})
 
-    def post(self, request, *args, **kwargs):
-        form = LoginForm(request.POST)
+def LoginView(request):
+    if request.method == 'POST':
+        form = ArtesanoLoginForm(request.POST)
+        
         if form.is_valid():
             correo_electronico = form.cleaned_data['correo_electronico']
-            contrasena = form.cleaned_data['contrasena']
+            contrasena = form.cleaned_data['contraseña']
 
-            user = authenticate(request, correo_electronico=correo_electronico, contrasena=contrasena)
+            autenticacion = Artesano.objects.filter(correo_electronico=correo_electronico, contraseña=contrasena)
 
-            if user is not None:
-                login(request, user)
-                messages.success(request, 'Se ha Iniciado sesión')
-                return redirect('index.html') 
-            else:
-                messages.error(request, 'Inicio de sesión fallido. Por favor, verifica que este correcta la información.')
-        return render(request, self.template_name, {'form': form})
+            if autenticacion.exists():
+                artesano = autenticacion.first()
+                return redirect(f"/artesano/index/{artesano.pk}")
+    else:
+        form = ArtesanoLoginForm()
 
-class RegisterView(View):
-    template_name = 'registro_Artesano.html'
+    return render(request, 'artesano/Inicio_Sesion_Artesano.html', {'form': form})
 
-    def post(self, request, *args, **kwargs):
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('Inicio_Sesion_Artesano.html')  
-        else:
-            return render(request, self.template_name, {'form': form})
+class RegistroView(generic.CreateView):
+    model = Artesano
+    template_name = "artesano/registro_Artesano.html"
+    fields = ['nombre', 'telefono', 'historia', 'fecha_nacimiento', 'correo_electronico', 'contraseña']
+    
+    def form_valid(self, form):
+        nuevo_artesano = form.save()
+        return redirect(f"/artesano/index/{nuevo_artesano.pk}")
+
+class PerfilArtesano(generic.DetailView):
+    model = Artesano
+    template_name = "artesano/perfil.html"

@@ -1,14 +1,10 @@
 from django.db import models
 
 # Create your models here.
-class InformacionPublica(models.Model):
+class Artesano(models.Model):
+    fecha_nacimiento = models.DateField()
+    contraseña = models.CharField(max_length=8)
     nombre = models.CharField(max_length=60)
     telefono = models.CharField(max_length= 10)
     historia = models.TextField(max_length=1000)
     correo_electronico = models.CharField(max_length=50)
-
-class InformacionPrivada(models.Model):
-    id_informacion_publica = models.ForeignKey(InformacionPublica, on_delete=models.CASCADE)
-    fecha_nacimiento = models.DateField()
-    contrasena = models.CharField(max_length=8)
-

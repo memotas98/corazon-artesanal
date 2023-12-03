@@ -6,7 +6,7 @@ from Carrito_de_Compras.models import CarritoCompra
 class FormaPago(models.Model):
     tipo_pago = models.CharField(max_length=80)
 
-class Targeta(models.Model):
+class Tarjeta(models.Model):
     idFormaPago = models.ForeignKey(FormaPago, on_delete=models.CASCADE)
     numeroTargeta = models.CharField(max_length=16)
     codigoSeguridad = models.CharField(max_length=3)
