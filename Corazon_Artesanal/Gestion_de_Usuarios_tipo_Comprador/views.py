@@ -69,7 +69,7 @@ def LoginView(request):
             return result
     else:
         form = AuthenticationForm()
-    return render(request, 'comprador/Inicio_Sesion_Comprador.html', {'form': form})
+    return render(request, 'comprador/Inicio_Sesion_Comprador.html', {'form': AuthenticationForm()})
 
 class detalleAutor(generic.DetailView):
     model = Artesano
