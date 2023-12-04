@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View, generic
 from django import forms
+
+from Gestion_de_Inventario.models import Obra
+from Gestion_de_Usuarios_tipo_Artesanos.models import Artesano
 from .models import Comprador
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
@@ -22,7 +25,9 @@ class CompradorLoginForm(forms.ModelForm):
 
 def IndexView(request, pk):
     comprador = get_object_or_404(Comprador, pk=pk)
-    return render(request, 'comprador/index.html', {'comprador': comprador})
+    obra_list = Obra.objects.order_by("nombre")
+    artesano_list = Artesano.objects.order_by("nombre")
+    return render(request, 'comprador/index.html', {'comprador': comprador, 'obra_list': obra_list, 'artesano_list': artesano_list})
 
 def LoginView(request):
     if request.method == 'POST':

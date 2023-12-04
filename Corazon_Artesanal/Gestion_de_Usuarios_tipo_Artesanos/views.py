@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View, generic
 from django import forms
+
+from Gestion_de_Inventario.models import Obra
 from .models import Artesano
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
@@ -19,7 +21,8 @@ class ArtesanoLoginForm(forms.ModelForm):
 
 def IndexView(request, pk):
     artesano = get_object_or_404(Artesano, pk=pk)
-    return render(request, 'artesano/index.html', {'artesano': artesano})
+    obra_list = Obra.objects.order_by("nombre")
+    return render(request, 'artesano/index.html', {'artesano': artesano, 'obra_list': obra_list})
 
 def LoginView(request):
     if request.method == 'POST':
@@ -51,3 +54,4 @@ class RegistroView(generic.CreateView):
 class PerfilArtesano(generic.DetailView):
     model = Artesano
     template_name = "artesano/perfil.html"
+    

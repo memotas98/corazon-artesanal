@@ -24,7 +24,7 @@
                         <a class="nav-link link-dark" href="{% url 'Gestion_de_Usuarios_tipo_Comprador:indexComprador' pk=comprador_id %}">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link link-dark" href="#">Comprar</a>
+                        <a class="nav-link link-dark" href="{% url 'Gestion_de_Productos:catalogo' pk=comprador_id %}">Comprar</a>
                         
                     </li>
                     <li class="nav-item">
@@ -46,28 +46,65 @@
             </div>
         </div>
     </nav>
-    <div class="d-flex justify-content-center align-items-center flex-grow-1" style="background-color: #cc9966;">
-        <div class="card">
-            <div class="card-header" style="background-color: #fbebdb;">
-                <h4>Nombre de la Obra: {{obra.nombre}}</h4>
-            </div>
-            <div class="card-body" style="background-color: #fbebdb;">
-                <h5>Autor de la obra: {{obra.id_artesano.nombre}}</h5>
-                <h6>Proceso creativo: {{obra.proceso_creativo}}</h6>
-                <h6>Precio: {{obra.precio}}</h6>
-                <h6>Cantidad Existente: {{obra.cantidadExistente}}</h6>
-                <div class="row">
-                    <div class="col">
-                        <h6>Descripcion de la obra: {{obra.descripcion}}</h6>
-                    </div>
-                    <div class="col">
-                        <h6>Historia del Artista: {{obra.id_artesano.historia}}</h6>
+    <div class=" flex-grow-1" style="background-color: #cc9966;">
+        <div class="container mt-4">
+            <div class="card">
+                <div class="card-header" style="background-color: #fbebdb;">
+                    <h4>Nombre de la Obra: {{obra.nombre}}</h4>
+                </div>
+                <div class="card-body" style="background-color: #fbebdb;">
+                    <h5>Autor de la obra: {{obra.id_artesano.nombre}}</h5>
+                    <h6>Proceso creativo: {{obra.proceso_creativo}}</h6>
+                    <h6>Precio: {{obra.precio}}</h6>
+                    <h6>Cantidad Existente: {{obra.cantidadExistente}}</h6>
+                    <div class="row">
+                        <div class="col">
+                            <h6>Descripcion de la obra: {{obra.descripcion}}</h6>
+                        </div>
+                        <div class="col">
+                            <h6>Historia del Artista: {{obra.id_artesano.historia}}</h6>
+                        </div>
                     </div>
                 </div>
+                <div class="card-footer text-center" style="background-color: #fbebdb;">
+                    <a class="btn" href="{% url 'Gestion_de_Productos:catalogo' pk=comprador_id %}" role="button" value="Confirm" style="background-color: #9f8f82; color: #fff;">Volver</a>
+                </div>
             </div>
-            <div class="card-footer text-center" style="background-color: #fbebdb;">
-                <a class="btn" href="{% url 'Gestion_de_Productos:catalogo' pk=comprador_id %}" role="button" value="Confirm" style="background-color: #9f8f82; color: #fff;">Volver</a>
+        </div>
+        <div class="container mt-4">
+            <div class="card">
+                <div class="card-header text-center">
+                    Crear Reseña
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button class="btn" style="background-color: #ffe5d0;" type="submit">Crear Reseña</button>
+                    </form>
+                </div>
             </div>
+        </div>
+        <div class="container mt-4">
+            {% if reseña_list %}
+                <div class="row row-cols-3">
+                    {% for reseña in reseña_list %}
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-body" style="background-color: #fbebdb;">
+                                    <h5>Autor de la reseña: {{reseña.id_comprador.username}}</h5>
+                                    <h6>Descripcion: {{reseña.descripcion}}</h6>
+                                    <h6>Calificacion {{reseña.calificacion}}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <p>No hay reseñas</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>No hay reseñas</p>
+            {% endif %}
         </div>
     </div>
     <div class="footer_section mt-auto" style="background-color: #221911;">

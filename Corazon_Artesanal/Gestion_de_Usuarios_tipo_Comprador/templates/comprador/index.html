@@ -46,30 +46,96 @@
             </div>
         </div>
     </nav>
-    <div style="background-color: #cc9966;" class="d-flex justify-content-center">
-        <div id="carouselExampleIndicators" class="carousel slide w-50">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="{% static 'Imgs/almohadas.jpeg' %}" class="w-100" height="400">
+    <div style="background-color: #cc9966;">
+        <div class="container d-flex justify-content-center">
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="width: 1000px; height: 500px;">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="{% static 'Imgs/almohadas.jpeg' %}" class="d-block w-100" height="500">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'Imgs/arte.jpeg' %}" class="d-block w-100" height="500">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'Imgs/sombrero.jpeg' %}" class="d-block w-100" height="500">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'Imgs/tela.jpeg' %}" class="d-block w-100" height="500"> 
+                    </div>
                 </div>
-                <div class="carousel-item">
-                    <img src="{% static 'Imgs/arte.jpeg' %}" class="w-100" height="400">
-                </div>
-                <div class="carousel-item">
-                    <img src="{% static 'Imgs/sombrero.jpeg' %}" class="w-100" height="400">
-                </div>
-                <div class="carousel-item">
-                    <img src="{% static 'Imgs/tela.jpeg' %}" class="w-100" height="400"> 
-                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+        </div>
+        <div class="container mt-4">
+            {% if artesano_list %}
+                <div class="row row-cols-3">
+                    {% for artesano in artesano_list %}
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header" style="background-color: #fbebdb;">
+                                    <h1>{{ artesano.nombre }}</h1>
+                                </div>
+                                <div class="card-body" style="background-color: #fbebdb;">
+                                    <h6 class="card-text">{{ artesano.fecha_nacimiento }}</h6>
+                                    <h4 class="card-text">{{ artesano.telefono }}</h4>
+                                    <h4 class="card-text">{{ artesano.correo_electronico }}</h4>
+                                    <h2 class="card-text">{{ artesano.historia }}</h2>
+                                </div>
+                                <div class="card-footer text-center" style="background-color: #fbebdb;">
+                                    TODO boton para llevar al detalle artesano
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <p>No hay ningun artesano</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>No hay ningun artesano</p>
+            {% endif %}
+        </div>
+        <div class="container mt-4">
+            {% if obra_list %}
+                <div class="row row-cols-3">
+                    {% for obra in obra_list %}
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header" style="background-color: #fbebdb;">
+                                    <h4>Nombre de la Obra: {{obra.nombre}}</h4>
+                                </div>
+                                <div class="card-body" style="background-color: #fbebdb;">
+                                    <h5>Autor de la obra: {{obra.id_artesano.nombre}}</h5>
+                                    <h6>Proceso creativo: {{obra.proceso_creativo}}</h6>
+                                    <h6>Precio: {{obra.precio}}</h6>
+                                    <h6>Cantidad Existente: {{obra.cantidadExistente}}</h6>
+                                    <div class="row">
+                                        <div class="col">
+                                            <h6>Descripcion de la obra: {{obra.descripcion}}</h6>
+                                        </div>
+                                        <div class="col">
+                                            <h6>Historia del Artista: {{obra.id_artesano.historia}}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer text-center" style="background-color: #fbebdb;">
+                                    <a class="btn" href="{% url 'Gestion_de_Productos:detalleObra' pk=comprador.pk id=obra.pk %}" role="button" value="Confirm" style="background-color: #9f8f82; color: #fff;">Detalle Obra</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <p>No hay ninguna obra agregada</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>No hay ninguna obra agregada</p>
+            {% endif %}
         </div>
     </div>
     <div class="footer_section mt-auto" style="background-color: #221911;">

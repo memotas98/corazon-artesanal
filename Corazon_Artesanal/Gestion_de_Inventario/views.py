@@ -47,7 +47,7 @@ class inventarioView(generic.ListView):
     context_object_name = "obra_list"
     
     def get_queryset(self):
-        return Obra.objects.order_by("-nombre")
+        return Obra.objects.order_by("nombre")
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
