@@ -25,16 +25,8 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link link-dark" href="{% url 'Gestion_de_Productos:catalogo' pk=comprador.pk %}">Comprar</a>
-                        
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link link-dark" href="#">Historial de compras</a>
                     </li>
                 </ul>
-                <div class="nav-item">
-                    <a class="nav-link logo" href="{% url 'Carrito_de_Compras:verCarrito' pk=comprador.pk %}"><img src="{% static 'Imgs/cart-shopping-solid.png' %}" width="45"></a>
-                </div>
-                
                 <div class="nav-item dropdown dropstart">
                     <a class="nav-link logo" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img src="{% static 'Imgs/user-solid.png' %}" width="35"></a>
                         <ul class="dropdown-menu">
@@ -89,7 +81,7 @@
                                     <h2 class="card-text">{{ artesano.historia }}</h2>
                                 </div>
                                 <div class="card-footer text-center" style="background-color: #fbebdb;">
-                                    TODO boton para llevar al detalle artesano
+                                    <a class="btn" href="{% url 'Gestion_de_Usuarios_tipo_Comprador:detalleAutor' pk=comprador.pk id=artesano.id%}" role="button" value="Confirm" style="background-color: #9f8f82; color: #fff;">Detalle Autor</a>
                                 </div>
                             </div>
                         </div>

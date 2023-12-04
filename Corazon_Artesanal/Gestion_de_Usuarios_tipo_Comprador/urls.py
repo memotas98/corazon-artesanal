@@ -6,6 +6,7 @@ urlpatterns = [
     path('index/<int:pk>', views.IndexView, name='indexComprador'),
     path('login/', views.LoginView, name='loginComprador'),
     path("perfil/<int:pk>/", views.PerfilComprador.as_view(), name="perfilComprador"),
-    path('', views.RegistroView.as_view(), name='RegistroComprador')
+    path('<int:pk>/detalle/autor/<int:id>', views.detalleAutor.as_view(), name="detalleAutor"),
+    path('', views.RegistroView, name='RegistroComprador')
 ]
 
